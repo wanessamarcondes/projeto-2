@@ -1,13 +1,12 @@
 const addButton = document.querySelector(".new-task__button")
 const inputTask = document.getElementById("input-task")
 const allTasks = document.querySelector(".all-tasks")
-const checkAllTasks = document.querySelector(".all-tasks-done__button")
-const clearAllTasks = document.querySelector(".remove-all-tasks__button")
 
 addButton.addEventListener("click", function(event){
     event.preventDefault();
 
-    if(inputTask.value.test(/^[a-z0-9]+$/i)){
+    const regex = /\w+/ig;
+    if(!regex.test(inputTask.value)){
         inputTask.focus();
         return false;
     }
@@ -26,6 +25,13 @@ addButton.addEventListener("click", function(event){
     newTask.appendChild(newTaskName);
     newTask.appendChild(removeButton);
     allTasks.appendChild(newTask);
+
+    const footer = document.querySelector(".footer")
+    const checkAllTasks = document.querySelector(".all-tasks-done__button")
+    const clearAllTasks = document.querySelector(".remove-all-tasks__button")
+
+    footer.style.display = "flex";
+    clearAllTasks.innerHTML = "Excluir tudo"
 
     removeButton.addEventListener("click", function(event){
         event.preventDefault();
@@ -53,9 +59,40 @@ addButton.addEventListener("click", function(event){
 
     clearAllTasks.addEventListener("click", function(event){
         event.preventDefault();
-        newTask.remove();
+        footer.style.display = "flex";
+        clearAllTasks.innerHTML = "Confirmar exclusão";
+        clearAllTasks.addEventListener("click", function(event){
+            newTask.remove();
+            footer.style.display = "none";
+        })
     })
 
-    inputTask.value = ""
+    inputTask.value = "";
     inputTask.focus();
+    
+    //newTask.onmousedown = function(event){
+        //newTask.style.position = "absolute";
+        //newTask.style.zIndex = 1000;
+
+        //moveAt(event.pageY);
+
+        //function moveAt(pageY){
+            //newTask.style.top = pageY - //newTask.offsetHeight / 2 + "px";
+        //}
+
+        //function onMouseMove(event){
+            //moveAt(event.pageY);
+        //}
+
+        //document.addEventListener("mousemove", onMouseMove);
+
+        //newTask.onmouseup = function(){
+            //document.removeEventListener("mousemove", onMouseMove);
+            //newTask.onmouseup = null;
+        //};
+    //};
+
+    //newTask.ondragstart = function(){
+        //return false;
+    //}
 })

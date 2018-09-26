@@ -10,8 +10,8 @@
     height: 100vh;
     display: flex;
     align-items: center;
-    background-color: #8EC5FC;
-    background-image: linear-gradient(270deg, #8EC5FC 0%, #E0C3FC 100%);
+    background-color: #BA7AF8;
+    background-image: linear-gradient(270deg, #8ec5fc 0%, #e0c3fc 100%);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -23,6 +23,7 @@
     margin: auto;
     background-color: #FFF;
     position: relative;
+    border-radius: 7px;
 }
 
 .header {
@@ -81,6 +82,8 @@
 .task__name {
     font-size: 1.5rem;
     font-weight: 700;
+    word-break: break-word;
+
 }
 
 .task__name_done {
@@ -88,6 +91,7 @@
     font-weight: 700;
     text-decoration: line-through;
     color: #bababa;
+    word-break: break-word;
 }
 
 .remove-task__button {
@@ -101,6 +105,10 @@
     justify-content: space-between;
     position: absolute;
     bottom: 0;
+}
+
+.hidden {
+    display: none;
 }
 
 .footer__button {
