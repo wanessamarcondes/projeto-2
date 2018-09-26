@@ -59,4 +59,3 @@ addButton.addEventListener("click", function(event){
     inputTask.value = ""
     inputTask.focus();
 })
-
