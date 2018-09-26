@@ -31,6 +31,7 @@ addButton.addEventListener("click", function(event){
     const clearAllTasks = document.querySelector(".remove-all-tasks__button")
 
     footer.style.display = "flex";
+    checkAllTasks.innerHTML = "Marcar tudo"
     clearAllTasks.innerHTML = "Excluir tudo"
 
     removeButton.addEventListener("click", function(event){
@@ -49,50 +50,31 @@ addButton.addEventListener("click", function(event){
         }
     })
 
+    //checkAllTasks.addEventListener("click", function(event){
+        //event.preventDefault();
+        //newTaskName.className = "task__name_done";
+        //checkAllTasks.innerHTML = "Desfazer";
+        //checkAllTasks.addEventListener("click", function(event){
+            //newTaskName.className = "task__name"
+        //})
+    //})
+
     checkAllTasks.addEventListener("click", function(event){
         event.preventDefault();
-        if(newTaskName.classList.contains("task__name")){
-            newTaskName.classList.remove("task__name");
-            newTaskName.classList.add("task__name_done");
-        } 
+        newTaskName.className = "task__name_done";
+        
+        checkAllTasks.addEventListener("click", function(event){
+            event.preventDefault();
+            newTaskName.className = "task__name"
+        })
     })
 
     clearAllTasks.addEventListener("click", function(event){
         event.preventDefault();
-        footer.style.display = "flex";
-        clearAllTasks.innerHTML = "Confirmar exclusão";
-        clearAllTasks.addEventListener("click", function(event){
-            newTask.remove();
-            footer.style.display = "none";
-        })
+        newTask.remove();
+        footer.style.display = "none";
     })
 
     inputTask.value = "";
     inputTask.focus();
-    
-    //newTask.onmousedown = function(event){
-        //newTask.style.position = "absolute";
-        //newTask.style.zIndex = 1000;
-
-        //moveAt(event.pageY);
-
-        //function moveAt(pageY){
-            //newTask.style.top = pageY - //newTask.offsetHeight / 2 + "px";
-        //}
-
-        //function onMouseMove(event){
-            //moveAt(event.pageY);
-        //}
-
-        //document.addEventListener("mousemove", onMouseMove);
-
-        //newTask.onmouseup = function(){
-            //document.removeEventListener("mousemove", onMouseMove);
-            //newTask.onmouseup = null;
-        //};
-    //};
-
-    //newTask.ondragstart = function(){
-        //return false;
-    //}
 })
