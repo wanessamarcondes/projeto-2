@@ -18,7 +18,7 @@
                 <input type="text" id="input-task" placeholder="nova tarefa">
                 <button class="button new-task__button">Add</button>
             </div>
-            <main id="target" class="all-tasks" ondrop="drop_handler(event);" ondragover="dragover_handler(event);">
+            <main id="target" class="all-tasks" ondrop="drop(event)" ondragover="allowDrop(event)">
                 <!-- <div id="task" class="task" draggable="true" ondragstart="dragstart_handler(event);" drop>
                     <h2 class="task__name">Tarefa 1</h2>
                     <button class="button remove-task__button">x</button>

@@ -1,6 +1,7 @@
 const addButton = document.querySelector(".new-task__button")
 const inputTask = document.getElementById("input-task")
 const allTasks = document.querySelector(".all-tasks")
+const taskList = [];
 
 addButton.addEventListener("click", function(event){
     event.preventDefault();
@@ -15,7 +16,7 @@ addButton.addEventListener("click", function(event){
     newTask.className = "task";
     newTask.setAttribute("id", "task");
     newTask.setAttribute("draggable", "true");
-    newTask.setAttribute("ondragstart", "dragstart_handler(event);")
+    newTask.setAttribute("ondragstart", "drag(event)")
 
     const newTaskName = document.createElement("h2");
     newTaskName.className = "task__name";
@@ -29,7 +30,7 @@ addButton.addEventListener("click", function(event){
     newTask.appendChild(removeButton);
     allTasks.appendChild(newTask);
 
-    newTask.setAttribute("draggable", "true");
+    taskList.push(newTask);
 
     const footer = document.querySelector(".footer")
     const checkAllTasks = document.querySelector(".all-tasks-done__button")
@@ -75,22 +76,28 @@ addButton.addEventListener("click", function(event){
     inputTask.focus();
 })
 
-// DRAG AND DROP
-
-function dragstart_handler(ev) {
-    ev.dataTransfer.setData("text/plain", ev.target.id);
-    ev.dropEffect = "move";
-    }
-
-function dragover_handler(ev) {
+function allowDrop(ev) {
     ev.preventDefault();
-    ev.dataTransfer.dropEffect = "move"
-    }
+}
 
-function drop_handler(ev) {
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
     ev.target.appendChild(document.getElementById(data));
-    }
+}
 
-///////////////////////////////
+const reorderTaskList = (event, taskList) => {
+    const movedTask = taskList.find((newTask, index) => index === event.oldIndex);
+    const remainingTasks = taskList.filter((newTask, index) => index !== event.oldIndex);
+
+    const reorderedList = [
+        ...remainingTasks.slice(0, event.newIndex), movedTask,
+        ...remainingTasks.slice(event.newIndex)
+    ];
+
+    console.log(reorderedList)
+}
