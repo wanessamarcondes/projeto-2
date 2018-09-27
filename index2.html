@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/style2.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
     <title>To-do List</title>
 </head>
@@ -18,11 +18,7 @@
                 <input type="text" id="input-task" placeholder="nova tarefa">
                 <button class="button new-task__button">Add</button>
             </div>
-            <main id="target" class="all-tasks" ondrop="drop_handler(event);" ondragover="dragover_handler(event);">
-                <!-- <div id="task" class="task" draggable="true" ondragstart="dragstart_handler(event);" drop>
-                    <h2 class="task__name">Tarefa 1</h2>
-                    <button class="button remove-task__button">x</button>
-                </div> -->
+            <main class="all-tasks" id="target" ondrop="drop_handler(event);" ondragover="dragover_handler(event);">
             </main>
             <footer class="footer hidden">
                 <button class="button footer__button all-tasks-done__button">Concluir tudo</button>
@@ -30,6 +26,6 @@
             </footer>
         </div>
     </div>
-    <script src="script/script.js"></script>
+    <script src="script2/script.js"></script>
 </body>
 </html>
