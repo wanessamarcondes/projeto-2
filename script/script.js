@@ -8,12 +8,14 @@ addButton.addEventListener("click", function(event){
     event.preventDefault();
     count += 1;
 
+    // validação de caracteres do input
     const regex = /\w+/ig;
     if(!regex.test(inputTask.value)){
         inputTask.focus();
         return false;
     }
 
+    // criar nova tarefa
     const newTask = document.createElement("div");
     newTask.className = "task";
     newTask.setAttribute("id", "task-"+count);
@@ -39,16 +41,19 @@ addButton.addEventListener("click", function(event){
     const checkAllTasks = document.querySelector(".all-tasks-done__button")
     const clearAllTasks = document.querySelector(".remove-all-tasks__button")
 
+    // definir display da barra de botões
     footer.style.display = "flex";
     checkAllTasks.innerHTML = "Marcar tudo";
     clearAllTasks.innerHTML = "Excluir tudo";
 
+    // remover tarefas individualmente
     removeButton.addEventListener("click", function(event){
         event.preventDefault();
         newTask.remove();
         taskList.splice(i, 1);
     })
 
+    // marcar uma tarefa como concluida individualmente
     newTaskName.addEventListener("click", function(event){
         event.preventDefault();
         if(newTaskName.classList.contains("task__name")){
@@ -60,11 +65,13 @@ addButton.addEventListener("click", function(event){
         }
     })
 
+    // marcar todas as tarefas como concluídas
     checkAllTasks.addEventListener("click", function(event){
         event.preventDefault();
         newTaskName.className = "task__name_done";
     })
 
+    // excluir todas as tarefas
     clearAllTasks.addEventListener("click", function(event){
         event.preventDefault();
         newTask.remove();
