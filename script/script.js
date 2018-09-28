@@ -12,6 +12,8 @@ addButton.addEventListener("click", function(event){
         return false;
     }
 
+    console.log(taskList);
+
     const newTask = document.createElement("div");
     newTask.className = "task";
     newTask.setAttribute("id", "task");
@@ -31,18 +33,21 @@ addButton.addEventListener("click", function(event){
     allTasks.appendChild(newTask);
 
     taskList.push(newTask);
+    let i = (taskList.selectedIndex);
 
     const footer = document.querySelector(".footer")
     const checkAllTasks = document.querySelector(".all-tasks-done__button")
     const clearAllTasks = document.querySelector(".remove-all-tasks__button")
 
     footer.style.display = "flex";
-    checkAllTasks.innerHTML = "Marcar tudo"
-    clearAllTasks.innerHTML = "Excluir tudo"
+    checkAllTasks.innerHTML = "Marcar tudo";
+    clearAllTasks.innerHTML = "Excluir tudo";
 
     removeButton.addEventListener("click", function(event){
         event.preventDefault();
         newTask.remove();
+        taskList.splice(i, 1);
+        console.log(taskList);
     })
 
     newTaskName.addEventListener("click", function(event){
@@ -56,25 +61,24 @@ addButton.addEventListener("click", function(event){
         }
     })
 
-    //checkAllTasks.addEventListener("click", function(event){
-        //event.preventDefault();
-        //newTaskName.className = "task__name_done";
-        
-        //checkAllTasks.addEventListener("click", function(event){
-            //event.preventDefault();
-            //newTaskName.className = "task__name"
-        //})
-    //})
+    checkAllTasks.addEventListener("click", function(event){
+        event.preventDefault();
+        newTaskName.className = "task__name_done";
+    })
 
     clearAllTasks.addEventListener("click", function(event){
         event.preventDefault();
         newTask.remove();
+        taskList.splice(i);
+        console.log(taskList);
         footer.style.display = "none";
     })
 
     inputTask.value = "";
     inputTask.focus();
 })
+
+// drag e drop
 
 function allowDrop(ev) {
     ev.preventDefault();
