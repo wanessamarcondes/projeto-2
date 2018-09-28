@@ -3,8 +3,10 @@ const inputTask = document.getElementById("input-task")
 const allTasks = document.querySelector(".all-tasks")
 const taskList = [];
 
+let count = 0;
 addButton.addEventListener("click", function(event){
     event.preventDefault();
+    count += 1;
 
     const regex = /\w+/ig;
     if(!regex.test(inputTask.value)){
@@ -12,12 +14,10 @@ addButton.addEventListener("click", function(event){
         return false;
     }
 
-    console.log(taskList);
-
     const newTask = document.createElement("div");
     newTask.className = "task";
-    newTask.setAttribute("id", "task");
-    newTask.setAttribute("draggable", "true");
+    newTask.setAttribute("id", "task-"+count);
+    newTask.setAttribute("draggable", true);
     newTask.setAttribute("ondragstart", "drag(event)")
 
     const newTaskName = document.createElement("h2");
@@ -47,7 +47,6 @@ addButton.addEventListener("click", function(event){
         event.preventDefault();
         newTask.remove();
         taskList.splice(i, 1);
-        console.log(taskList);
     })
 
     newTaskName.addEventListener("click", function(event){
@@ -70,7 +69,6 @@ addButton.addEventListener("click", function(event){
         event.preventDefault();
         newTask.remove();
         taskList.splice(i);
-        console.log(taskList);
         footer.style.display = "none";
     })
 
@@ -91,7 +89,8 @@ function drag(ev) {
 function drop(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
-    ev.target.appendChild(document.getElementById(data));
+    const reference = ev.target.closest(".task");
+    allTasks.insertBefore(document.getElementById(data), reference)
 }
 
 const reorderTaskList = (event, taskList) => {
@@ -102,6 +101,4 @@ const reorderTaskList = (event, taskList) => {
         ...remainingTasks.slice(0, event.newIndex), movedTask,
         ...remainingTasks.slice(event.newIndex)
     ];
-
-    console.log(reorderedList)
 }
